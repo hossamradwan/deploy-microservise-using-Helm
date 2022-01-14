@@ -24,7 +24,7 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:8080"] # bash command to execute this programe. this program takes a prameter "-addr"
         readinessProbe:
           periodSeconds: 5
           exec:
@@ -120,7 +120,7 @@ spec:
           value: "3550"
         livenessProbe:
           periodSeconds: 5
-          httpGet:
+          httpGet:   # alternative to "exec" command
             path: /health
             port: 3550
         readinessProbe:
@@ -303,11 +303,11 @@ spec:
           periodSeconds: 5
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:9555"]
-        resources:
+        resources:  # define resources for the container. should be done for all
           requests:
-            cpu: 200m
-            memory: 180Mi
-          limits:
+            cpu: 200m # millicore
+            memory: 180Mi # bytes
+          limits: # define resources limites for the container. should be done for all
             cpu: 300m
             memory: 300Mi
 ---
@@ -391,10 +391,10 @@ spec:
         livenessProbe:
           initialDelaySeconds: 5
           periodSeconds: 5
-          tcpSocket: 
+          tcpSocket:  # alternative to "exec" command
             port: 6379
         readinessProbe:
-          initialDelaySeconds: 5
+          initialDelaySeconds: 5 # an option that coud be added to make the probe wait for some seconds
           periodSeconds: 5
           tcpSocket: 
             port: 6379
@@ -537,3 +537,6 @@ spec:
   ports:
   - protocol: TCP
     port: 80
+    targetPort: 8080
+    # nodePort: 30007
+    

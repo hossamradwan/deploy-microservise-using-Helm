@@ -20,5 +20,5 @@ spec:
         env:
         {{- range .Values.containerEnvVars}}
         - name: {{ .name }}
-          value: {{ .value | quote }}
+          value: {{ .value | quote }} # quote is used to send the value as a string
         {{- end}}
